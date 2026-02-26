@@ -7,9 +7,6 @@ Key:        0100110001001111010101100100010101000011010100110100111001000100
             (ASCII: "LOVECSND")
 """
 
-# ─────────────────────────────────────────────
-# Standard DES Tables
-# ─────────────────────────────────────────────
 
 # Initial Permutation (IP)
 IP = [
@@ -126,10 +123,8 @@ S_BOXES = [
      [2,1,14,7,4,10,8,13,15,12,9,0,3,5,6,11]]
 ]
 
-# ─────────────────────────────────────────────
-# Helper Functions
-# ─────────────────────────────────────────────
 
+# Helper Functions
 def permute(bits, table):
     """Apply a permutation table to a bit string."""
     return ''.join(bits[i-1] for i in table)
@@ -159,9 +154,8 @@ def f_function(R_32, round_key_48):
     s_out    = s_box_substitute(xored)      # 48 → 32 bits via S-boxes
     return permute(s_out, P)               # P-permutation
 
-# ─────────────────────────────────────────────
+
 # Step 1: Generate 16 Round Keys
-# ─────────────────────────────────────────────
 
 # Key given in the problem (correct binary)
 key_bin = "0100110001001111010101100100010101000011010100110100111001000100"
@@ -184,9 +178,8 @@ for i, shift in enumerate(SHIFTS):
     round_keys.append(rk)
     print(f"Round {i+1:2d} key: {rk}")
 
-# ─────────────────────────────────────────────
+
 # Step 2: DES Decryption
-# ─────────────────────────────────────────────
 
 ciphertext = "1100101011101101101000100110010101011111101101110011100001110011"
 
@@ -227,9 +220,7 @@ print("-" * 60)
 print(f"Pre-FP (R16+L16):    {pre_fp}")
 print(f"After FP (plaintext):{plaintext_bits}\n")
 
-# ─────────────────────────────────────────────
 # Step 3: Convert Plaintext Bits → ASCII
-# ─────────────────────────────────────────────
 
 plaintext_chars = ""
 for i in range(0, 64, 8):
